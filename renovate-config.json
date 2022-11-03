@@ -1,0 +1,36 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Default configuration for We Are Design Agency repositories…",
+  "extends": [
+    ":dependencyDashboard",
+    ":ignoreModulesAndTests",
+    ":automergeMinor",
+    ":automergeBranch",
+    ":rebaseStalePrs",
+    ":semanticCommitsDisabled",
+    ":separateMajorReleases",
+    ":combinePatchMinorReleases",
+    ":enableVulnerabilityAlerts",
+    ":timezone(UTC)",
+    ":label(dependencies)",
+    "group:allNonMajor"
+  ],
+  "commitBodyTable": true,
+  "lockFileMaintenance": {"enabled": true, "extends": ["schedule:daily"]},
+  "platformAutomerge": true,
+  "rangeStrategy": "replace",
+  "rollbackPrs": true,
+  "packageRules": [
+    {"matchDepTypes": ["require"], "rangeStrategy": "widen"},
+    {
+      "matchPackageNames": ["php"],
+      "extends": [":automergeDisabled", ":automergePr", ":label(Awaiting Maintainer Response)"],
+      "ignoreUnstable": false,
+      "groupName": "PHP"
+    }
+  ],
+  "vulnerabilityAlerts": {
+    "extends": [":automergeDisabled", ":automergePr", ":labels(Awaiting Maintainer Response, security)"],
+    "rangeStrategy": "bump"
+  }
+}
